@@ -7,9 +7,9 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 
 data=load_breast_cancer()
-x=load_breast_cancer.data
-y=load_breast_cancer.target
-features_train, features_test, labels_train, labels_test=train_test_split(x,y, test_size=0.2)
+x=data.data
+y=data.target
+features_train, features_test, labels_train, labels_test=train_test_split(x,y, test_size=0.2, random_state=42)
 
 decision_tree_classifier=DecisionTreeClassifier(criterion='entropy')
 decision_tree_classifier.fit(features_train, labels_train)
