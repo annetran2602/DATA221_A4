@@ -9,13 +9,13 @@ from sklearn.model_selection import train_test_split
 data=load_breast_cancer()
 x=data.data
 y=data.target
-features_train, features_test, labels_train, labels_test=train_test_split(x,y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test=train_test_split(x,y, test_size=0.2, random_state=42)
 
 decision_tree_classifier=DecisionTreeClassifier(criterion='entropy')
-decision_tree_classifier.fit(features_train, labels_train)
+decision_tree_classifier.fit(X_train, y_train)
 
-predicted_labels=decision_tree_classifier.predict(features_test)
-accuracy=accuracy_score(labels_test, predicted_labels)
+predicted_result=decision_tree_classifier.predict(X_test)
+accuracy=accuracy_score(y_test, predicted_result)
 
 # Answer the question-------------------------------------------------------
 # 1.
