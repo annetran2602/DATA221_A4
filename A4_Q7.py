@@ -4,9 +4,9 @@
 import tensorflow as tf
 from keras.src.metrics.metrics_utils import confusion_matrix
 from tensorflow.keras.datasets import fashion_mnist
-from tensorflow.keras import layers, models
 (X_train, y_train), (X_test, y_test) = fashion_mnist.load_data()
 import numpy as np
+from tensorflow.keras import layers, models
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 
@@ -46,11 +46,11 @@ model.compile(optimizer='adam', loss='sparse_categorical_crossentropy', metrics=
 history=model.fit(X_train, y_train, epochs=15, batch_size=64, validation_split=0.1)
 
 # Prediction
-predicted_result_probs=model.predict(X_test[:1], verbose=0)
+predicted_result_probs=model.predict(X_test, verbose=0)
 predicted_result=np.argmax(predicted_result_probs, axis=1)
 
 print("true", int(y_test[0]))
-print("predicted image", predicted_result)
+print("predicted image", int(predicted_result[0]))
 
 confusionMatrix=confusion_matrix(y_test,predicted_result)
 print(confusionMatrix)
@@ -60,7 +60,7 @@ labels={0: "T-shirt/top", 1: "Trouser", 2: "Pullover", 3: "Dress",
     4: "Coat", 5: "Sandal", 6: "Shirt", 7: "Sneaker",
     8: "Bag", 9: "Ankle boot"}
 
-for i in range(3):
+for i in range(min(3, len(misclassified_idx))):
     idx=misclassified_idx[i]
     plt.imshow(X_test[idx].reshape(28, 28), cmap='gray')
     plt.title(f"True: {labels[y_test[idx]]} | Predicted: {labels[predicted_result[idx]]}")
